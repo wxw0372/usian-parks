@@ -5,7 +5,11 @@
         >添加区域</el-button
       >
     </div>
-    <el-table :data="areaList" style="width: 100%">
+    <el-table
+      :data="areaList"
+      style="width: 100%"
+      header-cell-style=" background-color: #f4f6f8"
+    >
       <el-table-column type="index" label="序号"> </el-table-column>
       <el-table-column prop="areaName" label="区域名称"> </el-table-column>
       <el-table-column prop="spaceNumber" label="车位数(个)"> </el-table-column>
@@ -68,10 +72,11 @@
           ></el-input>
         </el-form-item>
         <el-form-item label="车位数(个)" prop="spaceNumber">
-          <el-input
+          <el-input-number
+            controls-position="right"
             v-model="dialoForm.spaceNumber"
             placeholder="请输入车位个数"
-          ></el-input>
+          ></el-input-number>
         </el-form-item>
         <el-form-item label="面积(㎡)" prop="areaProportion">
           <el-input
@@ -188,6 +193,7 @@ export default {
     // 添加区域方法
     async submitAdd() {
       if (this.dialoForm.id) {
+        // 编辑区域
         const res = await editAreaApi({
           id: this.dialoForm.id,
           areaName: this.dialoForm.areaName,
@@ -196,8 +202,8 @@ export default {
           ruleId: this.dialoForm.ruleId,
           remark: this.dialoForm.remark,
         });
-        //   console.log('123123',res);
       } else {
+        // 添加区域
         const res = await addAreaApi(this.dialoForm);
         console.log("res==>", res);
         this.dialoForm = {
@@ -218,20 +224,27 @@ export default {
     },
     // 回显
     edit(row) {
+      this.getDropList();
       this.showDialo = true;
       this.dialoForm = JSON.parse(JSON.stringify(row));
     },
   },
   created() {
     this.getAreaList();
-    this.getDropList();
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.addBtn {
+  margin-bottom: 20px;
+}
 .el-form-item {
   width: 70%;
   margin: 15px auto;
+}
+.el-pagination {
+  text-align: right;
+  margin-top: 20px;
 }
 </style>

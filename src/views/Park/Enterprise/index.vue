@@ -17,7 +17,12 @@
     <el-button type="primary" size="mini" style="margin: 15px 0" @click="toAdd"
       >添加企业</el-button
     >
-    <el-table :data="tableData" style="width: 100%" @expand-change="detail">
+    <el-table
+      :data="tableData"
+      style="width: 100%"
+      @expand-change="detail"
+      header-cell-style=" background-color: #f4f6f8"
+    >
       <el-table-column type="expand">
         <template #default="{ row }">
           <el-table :data="row.rentList" style="width: 100%">

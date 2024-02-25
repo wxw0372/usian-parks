@@ -21,7 +21,11 @@
       @click="showDialo = true"
       >添加楼宇</el-button
     >
-    <el-table :data="tableData" style="width: 100%">
+    <el-table
+      :data="tableData"
+      style="width: 100%"
+      header-cell-style=" background-color: #f4f6f8"
+    >
       <el-table-column type="index" label="序号"> </el-table-column>
       <el-table-column prop="name" label="楼宇名称"> </el-table-column>
       <el-table-column prop="floors" label="层数"> </el-table-column>
